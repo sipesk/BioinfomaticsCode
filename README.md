@@ -6,7 +6,7 @@ This script was made to deal with the terrible names that are given when you dow
 That file will come with the genome cart download. To run: In termininal, after putting the script file in the same directory as all of the downloaded files from JGI: $python3 filerenamer.py
 
 
-## ChangeNames_csv
+## Renamewithcsv
 This script is intended to batch change the names of file names to whatever you desire. It takes a csvfile with two columns; oldnames and newnames. 
 The user must provide a csv file with these headers and copy the file names (no extention needed) into the oldnames col and provide what the newnames should be.
 To run: in the directory with the file names to change, python3 changenamescsv.py
@@ -20,6 +20,12 @@ In the directiory with all the bowtie outputs and the 'total reads all sample.tx
 
 ## Automate metawrap
 This script is intended to automate the matching of forward and reverse fastq.gz files, interate over the file by only unzipping the pair and then applying the pair in the correct order to metawrap's (see https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md) assembly process. This is a great way to limit the cpu burden and also allow the process to run autonomously. To run this, in the directory will all the .fastq.gz files that you want to assemble into trimmed, processed reads, run: python3 automat_metawrap.py.
+
+## Concat genes by organism
+This script was inteneted to combine a gene_coverages.txt file from an anvi'o output and combine them by the Prokka ID and the different sites. This script is mainly used for a very specific in-house data combination issue. However, this script could be edited to combine datasets and and the number of reads or coverage or whatever per dataset. 
+
+
+
 
 
 
