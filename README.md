@@ -11,6 +11,9 @@ This script is intended to batch change the names of file names to whatever you 
 The user must provide a csv file with these headers and copy the file names (no extention needed) into the oldnames col and provide what the newnames should be.
 To run: in the directory with the file names to change, python3 changenamescsv.py
 
+## Rename part of file
+The script is like the one above but will only rename a small portion of the filenames with the csv file. The csv file should include the the part of file to rename and the portion of the file to be renamed.
+
 
 ## Process_data
 This script is intented to compile the outputs from Bowtie2. Bowtie2 finishes with txt files that the user used in Bowtie2 as bins/MAGS and also the sorted CSV file of the metagenome/whole sample that was used. Briefly, Bowtie2 will present the number of mapped reads to the whole sample. See more in /sipesk/NEWBowtie.
