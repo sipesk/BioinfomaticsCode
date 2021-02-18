@@ -1,5 +1,5 @@
 ## Supplemental Bioinfomatics Programs
-Some python scripts that I've needed to use to manipulate data while working with bioinformatics
+Some python scripts that I've needed to use to manipulate data while working with bioinformatics. Email ksipes@vols.utk.edu for some attempted help 
 
 ## File renamer
 This script was made to deal with the terrible names that are given when you download genome sets from JGI (Joint Genome Institue). This script is inteneded to be in the same directory as the donloaded and unzipped JGI folders. It will rename each subdir to the name that is after the '>' in the .faa file. 
