@@ -16,7 +16,7 @@ def find_master_file(list_of_files):
     # Iterate through all files
     for f in list_of_files:
         # Look for the file, ignoring case
-        if "total_reads_all_sample.txt" in f.lower(): 
+        if "total_reads_all_sample" in f.lower(): 
             logging.info("total reads file found! \n")
             # Store the filepath
             total_reads_fp = f
@@ -111,16 +111,23 @@ def get_depth_for_filename(filename, total_reads_fp):
     available_depths = data["Sample Depth"]
     # Look for available depths in the filename
     for idx, depth in enumerate(available_depths):
-        depth_str = (str(depth).replace(".", ""))
-        # Check if a trailing 0 was added and remove it
-        if depth_str[-1] == "0":
-            depth_str = depth_str[:-1]
-        # Find where the depth starts in the filename
-        start_idx = filename.find(depth_str)
-        # Check the depth_str is in the filename and the character before the depth is not numeric
-        if depth_str in filename and not filename[start_idx - 1].isnumeric():
-            #logging.debug("Match found! {} {}".format(depth_str, filename))
-            return depth, idx
+        if depth.isnumeric():
+            depth_str = (str(depth).replace(".", ""))
+            # Check if a trailing 0 was added and remove it
+            if depth_str[-1] == "0":
+                depth_str = depth_str[:-1]
+            # Find where the depth starts in the filename
+            start_idx = filename.find(depth_str)
+            # Check the depth_str is in the filename and the character before the depth is not numeric
+            if depth_str in filename and not filename[start_idx - 1].isnumeric():
+                #logging.debug("Match found! {} {}".format(depth_str, filename))
+                return depth, idx
+        ##For ASCII letters
+        else:
+            start_idx = filename.find(depth)
+            if depth in filename and (filename[start_idx + len(depth)] == "_" or  filename[start_idx + len(depth)] == "."):
+                logging.debug("Match found! {} {}".format(depth, filename))
+                return depth, idx
 
 def aggregate_text_files(list_of_text_files, total_reads_fp):
     """ Combine all text files into a list to make matching more efficient """
@@ -133,7 +140,12 @@ def aggregate_text_files(list_of_text_files, total_reads_fp):
         lines = open(f, 'r').readlines()
         # Append to the mega list as a tuple
         for line in lines:
-            depth, _ = get_depth_for_filename(name, total_reads_fp)
+            logging.debug(f"name:{name}")
+            try:
+                depth, _ = get_depth_for_filename(name, total_reads_fp)
+            except Exception as e:
+                logging.debug(f"Exception caught, {e}")
+                depth = None
             text_file_mega_list.append((name, depth, line.strip("\n")))
     logging.debug("Mega list is \t {}".format(text_file_mega_list))
     return text_file_mega_list
