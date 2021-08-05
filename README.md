@@ -27,7 +27,14 @@ This script is intended to automate the matching of forward and reverse fastq.gz
 ## Concat genes by organism
 This script was inteneted to combine a gene_coverages.txt file from an anvi'o output and combine them by the Prokka ID and the different sites. This script is mainly used for a very specific in-house data combination issue. However, this script could be edited to combine datasets and and the number of reads or coverage or whatever per dataset. 
 
+## Rename files with csv
+You need a csv file with the base name of the files in the first column of your csv and then the name you want to change it to in the second columm. Its easiest if the csv is in the directory with the files you want to rename. In the terminal, nagivate to the dir you want to change and run as python3 renamewithcsv.py 'csvfile.csv'.
 
+## Remove files not in csv
+Make a csv file with one column with all the basename file names that you want to keep. This py is hardcoded so change the lines in the script to point to the right directory and the csv file with all the file names. Run as removefiles.py 'filestokeep.csv'.
+
+## Count certain querey in a dir of selected files
+If you want to could the times a certain gene or annotation occurs in files (i use .tsv here) then make one excell file with col1 = gene, col2 = product (use those as your headers). And then under gene you can list all the genes of interest and col2 is where you can classify them in another upper level (enzyme/pathways/whatever). It will output a csv with all the counts of each file.
 
 
 
